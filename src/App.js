@@ -46,19 +46,15 @@ class App extends React.Component {
   //  key={index+'00'} 
   theOutput = () =>{
     return this.state.todos.map((el, index)=> <li key={'key'+ index}>{el}
-    <button onSubmit={this.deleteEl} key={'00'}>Delete</button>
+    <button onSubmit={this.deleteEl} key={index}>Delete</button>
     <button onSubmit={this.editEl}>Edit</button>
     </li>)
   }
 
   deleteEl=(props)=>{
-    if(props.key==='00'){
       this.setState({
-        todos: this.state.todos.filter(el=> this.state.todos.indexOf(el)!==props.index)
-      })
-    }
-    
-      
+        todos: this.state.todos.filter(el=> this.state.todos.indexOf(el)!==props.key)
+      })  
   }
 
   editEl=(index)=>{
