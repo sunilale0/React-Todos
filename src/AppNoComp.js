@@ -1,8 +1,6 @@
 import React from 'react';
 import Lists from './Lists/Lists';
 import './App.css';
-import Forms from './Forms/Forms';
-import Navs from './Navs/Navs'
 
 class App extends React.Component {
   constructor(props){
@@ -11,9 +9,7 @@ class App extends React.Component {
       todos: ['this is some default todos', 'this is the next todo'],
       currentVal: '',
       editMode: false,
-      editIndex: null,
-      checkToggle: [],
-      checkIndex: [],
+      editIndex: null
     }
   }
 
@@ -31,7 +27,7 @@ class App extends React.Component {
               return this.state.currentVal
             } else return element;
           }),
-          editMode: false,
+          editMode: false
         })
       }
     }else if(this.state.currentVal !== ''){
@@ -58,78 +54,25 @@ class App extends React.Component {
   }
   //  key={index+'00'} 
   theOutput = () =>{
-
-    let style={
-      listStyleType: 'none'
-    }
-
-    console.log("this.checkToggle in theOutput: ", this.state.checkToggle)
-    return this.state.todos.map((el, index) => 
-    
-    (this.state.checkIndex[index]===true) ? 
-    <li key={index} style={style}>
+    return this.state.todos.map((el, index) => <li key={'key' + index}>
       <input
         type='checkbox'
         value={index}
         onClick={this.onCheck} />
-      <del>{el}</del>   
+      {el}
       <button
         name='delete'
         onClick={this.deleteEl}
         value={index}>Delete</button>
-    {/* <button 
+    <button 
         name='edit'
         onClick={this.editEl}
-        value={index}>Edit</button> */}
-    </li>
-    :
-    <li key={index} style={style}>
-    <input
-      type='checkbox'
-      value={index}
-      onClick={this.onCheck} />
-    {el}
-    <button
-      name='delete'
-      onClick={this.deleteEl}
-      value={index}>Delete</button>
-  <button 
-      name='edit'
-      onClick={this.editEl}
-      value={index}>Edit</button>
-  </li>
-  )
+        value={index}>Edit</button>
+    </li>)
   }
 
-  onCheckCheck = (toCkIndex) =>{
-   let tmp =  this.state.todos.map((el, index)=>{ /// [false, false, true, false, false]
-    if(index === toCkIndex) {
-      console.log('index===toCkIndex conditional')
-      if(this.state.checkIndex[index]===true){
-        return false;
-      }
-      return true;}
-    if(this.state.checkIndex[index] === true) {
-      console.log('this.state.checkIndex[index]===true')
-      return true;}
-    return false;
-  })
-  console.log('tmp in onCheckCheck ',tmp)
-      this.setState({                              ///todos:[elm0,  1,      2  ,   3,     4]
-        checkIndex:tmp,
-      })
-    }
-    
-    
-
-  onCheck = (props) => {
+  onCheck = () => {
     console.log('[App.js] onCheck event')
-    this.onCheckCheck(parseInt(props.target.value));
-    console.log('onCheckCheck inside onCheck, ', this.state.checkIndex)
-    this.setState({
-      // checkToggle: !this.state.checkToggle,
-      // checkIndex: parseInt(props.target.value)
-    })
   }
 
   deleteEl = (props) => {
@@ -145,7 +88,6 @@ class App extends React.Component {
     
     console.log('[App.js] editEl clicked');
     console.log('editEl event.target.value: ', event.target.value)
-    console.log('type of target value: ', typeof event.target.value)
     this.setState({
       currentVal: this.state.todos[event.target.value],
       editMode: true,
@@ -155,23 +97,31 @@ class App extends React.Component {
 
 
   render(){
-
-    console.log('this.output: ', this.theOutput())
     return (
-        <div className="main">
-        <Navs header={true}></Navs>
-        <div className="App">
-        <Forms 
-        onSubmit = {this.addTask}
-        currInput={this.currentInput}
-        currVal={this.state.currentVal}
-        inputDisplay={this.state.currentVal}/>
-        <Lists theList = {this.theOutput()}/>
-       
+      <div className="App">
+        
+        <form  onSubmit = {this.addTask}>
+        {/* <input type = 'text' placeholder='I have to do this or that' key='' onChange={this.currentInput} value ='sdfdf'/> */}
+          <input
+            type='text'
+            placeholder='I have to do this or that'
+            key='1'
+            onChange={this.currentInput}
+            value={this.state.currentVal}/>
+
+        {/* <input type= 'submit' onSubmit = {this.addTask}/> */}
+        <button type = 'submit'>Add Task</button>
+
+        </form>
+        
+        <p>
+          Just the temporary display below the input: {this.state.currentVal}
+        </p>
+        <ul>
+           {this.theOutput()}
+        </ul>
+        <Lists />
       </div>
-        <Navs header={false}></Navs>
-        </div>
-       
     );
   }
   

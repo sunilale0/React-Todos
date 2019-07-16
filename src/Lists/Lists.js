@@ -2,9 +2,16 @@ import React from 'react';
 import List from './List/List';
 
 
-const lists = () => {
+const lists = (props) => {
+
+    let output = props.theList;
+
     return (
-        <List />
+        <div>
+            <List />
+            {output}
+        </div>
+        
     )
 }
 
