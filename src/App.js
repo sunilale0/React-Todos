@@ -20,9 +20,11 @@ class App extends React.Component {
   addTask = (event) =>{
     event.preventDefault()
     console.log('[App.js] addTask runs')
+    
     if (this.state.editMode) {
       if (this.state.currentVal !== '') {
         console.log('value of newArr: ',)
+        
         this.setState({
           currentVal: '',
           todos: this.state.todos.map((element, index) => {
@@ -34,7 +36,10 @@ class App extends React.Component {
           editMode: false,
         })
       }
-    }else if(this.state.currentVal !== ''){
+    }
+    
+    else if(this.state.currentVal !== ''){
+      
       this.setState({
         currentVal: '',
         todos: [...this.state.todos, this.state.currentVal]
@@ -46,6 +51,7 @@ class App extends React.Component {
   currentInput = (props) =>{
     console.log('props in currentInput 29', props.target.value)
     console.log('currentInput [App.js]: ', props.target.value)
+    
     this.setState({
       currentVal: props.target.value
     })
@@ -54,9 +60,11 @@ class App extends React.Component {
 
   currentVal = () =>{
     console.log('currentVal [App.js]: ', )
+    
     return <p>{this.state.value}</p>
   }
-  //  key={index+'00'} 
+  
+  
   theOutput = () =>{
 
     let style={
@@ -67,6 +75,7 @@ class App extends React.Component {
     return this.state.todos.map((el, index) => 
     
     (this.state.checkIndex[index]===true) ? 
+    
     <li key={index} style={style}>
       <input
         type='checkbox'
@@ -102,18 +111,25 @@ class App extends React.Component {
   }
 
   onCheckCheck = (toCkIndex) =>{
-   let tmp =  this.state.todos.map((el, index)=>{ /// [false, false, true, false, false]
-    if(index === toCkIndex) {
+  
+    let tmp =  this.state.todos.map((el, index)=>{ 
+    
+      if(index === toCkIndex) {
       console.log('index===toCkIndex conditional')
+     
       if(this.state.checkIndex[index]===true){
-        return false;
-      }
-      return true;}
+        return false;}
+
+      return true;
+    }
+
     if(this.state.checkIndex[index] === true) {
       console.log('this.state.checkIndex[index]===true')
       return true;}
+
     return false;
   })
+
   console.log('tmp in onCheckCheck ',tmp)
       this.setState({                              ///todos:[elm0,  1,      2  ,   3,     4]
         checkIndex:tmp,
@@ -124,7 +140,9 @@ class App extends React.Component {
 
   onCheck = (props) => {
     console.log('[App.js] onCheck event')
+
     this.onCheckCheck(parseInt(props.target.value));
+
     console.log('onCheckCheck inside onCheck, ', this.state.checkIndex)
     this.setState({
       // checkToggle: !this.state.checkToggle,
@@ -135,8 +153,10 @@ class App extends React.Component {
   deleteEl = (props) => {
     console.log('[App.js] deleteEl clicked')
     console.log('props.key deleteEl: ' + props.target.value)
-      this.setState({
-        todos: this.state.todos.filter((el, index) =>
+      
+    this.setState({
+        
+      todos: this.state.todos.filter((el, index) =>
           index !== parseInt(props.target.value))
       })  
   }
@@ -146,8 +166,9 @@ class App extends React.Component {
     console.log('[App.js] editEl clicked');
     console.log('editEl event.target.value: ', event.target.value)
     console.log('type of target value: ', typeof event.target.value)
+
     this.setState({
-      currentVal: this.state.todos[event.target.value],
+      currentVal: this.state.todos[parseInt(event.target.value)],
       editMode: true,
       editIndex: parseInt(event.target.value)
     })

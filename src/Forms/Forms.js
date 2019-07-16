@@ -1,17 +1,16 @@
 import React from 'react';
 
 
-const forms = (props) =>{
-    
+const forms = ({onSubmit,inputDisplay,currInput,currVal}) =>{
 
     return(
-        <form onSubmit={props.onSubmit}>
-            <p>To Add => {props.inputDisplay}</p>
+        <form onSubmit={onSubmit}>
+            <p>To Add => {inputDisplay}</p>
             <input 
             type = ''
             placeholder='I have to do this or that'
-            onChange={props.currInput}
-            value={props.currVal}/>
+            onChange={currInput}
+            value={currVal}/>
             <button type='submit'>Add Task</button> 
             
         </form>

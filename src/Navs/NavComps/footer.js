@@ -1,9 +1,9 @@
 import React from 'react';
 
-const footer = (props) =>{
+const footer = ({style}) =>{
 
     return (
-        <div style={props.style}>
+        <div style={style}>
             <div>Copyright Protected by TechWorks.</div> <div>2019</div>
         </div>
     )

@@ -1,12 +1,12 @@
 import React from 'react';
 
-const header = (props) => {
+const header = ({style}) => {
 
 
 
 
     return(
-        <div style={props.style}>
+        <div style={style}>
             <div>The ToDo List </div>
             <div>Start Adding!</div>
         </div>

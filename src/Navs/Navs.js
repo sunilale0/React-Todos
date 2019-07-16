@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './NavComps/header';
 import Footer from './NavComps/footer';
 
-const navs = (props) => {
+const navs = ({header}) => {
 
     const style = {
         backgroundColor: '#0000ee',
@@ -14,8 +14,10 @@ const navs = (props) => {
     }
     
     return(
-        (props.header)?
-        <Header style={style}/>: <Footer style={style}/>
+        (header)?
+        <Header style={style}/>
+        : 
+        <Footer style={style}/>
     )
 }
 
