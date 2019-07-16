@@ -54,7 +54,12 @@ class App extends React.Component {
   }
   //  key={index+'00'} 
   theOutput = () =>{
-    return this.state.todos.map((el, index)=> <li key={'key'+ index}>{el}
+    return this.state.todos.map((el, index) => <li key={'key' + index}>
+      <input
+        type='checkbox'
+        value={index}
+        onClick={this.onCheck} />
+      {el}
       <button
         name='delete'
         onClick={this.deleteEl}
@@ -64,6 +69,10 @@ class App extends React.Component {
         onClick={this.editEl}
         value={index}>Edit</button>
     </li>)
+  }
+
+  onCheck = () => {
+    console.log('[App.js] onCheck event')
   }
 
   deleteEl = (props) => {
